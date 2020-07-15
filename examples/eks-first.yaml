@@ -1,0 +1,27 @@
+# A simple example of ClusterConfig object:
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: cluster-1
+  region: ${AWS_REGION}
+
+managedNodeGroups:
+  - name: nodegroup
+    desiredCapacity: 3
+
+# To enable all of the control plane logs, uncomment below:
+# cloudWatch:
+#     clusterLogging:
+#     enableTypes: ["*"]
+# To enable some types of the control plane logs, uncomment below:
+
+# cloudWatch:
+#     clusterLogging:
+#         # enable specific types of cluster control plane logs
+#         enableTypes: ["audit", "authenticator", "controllerManager"]
+#         # all supported types: "api", "audit", "authenticator", "controllerManager", "scheduler"
+#         # supported special values: "*" and "all"
+secretsEncryption:
+  keyARN: ${MASTER_ARN}
